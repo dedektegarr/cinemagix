@@ -8,6 +8,11 @@
   body {
     @apply bg-color-dark-2 text-color-light font-roboto;
   }
+
+  body.mobile-nav-open {
+    @apply overflow-hidden;
+  }
+
   .nav-link {
     @apply after:content-[''] after:-mb-3 after:mt-2 after:block after:w-0 after:hover:w-full after:transition-all after:duration-200 after:h-1 after:bg-color-primary after:rounded-full;
   }
