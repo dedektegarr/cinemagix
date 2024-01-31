@@ -11,10 +11,8 @@ const RootLayout = () => {
     <>
       <AnimatePresence>{showMobileNav && <NavbarMobile />}</AnimatePresence>
 
-      <header>
-        <Navbar />
-      </header>
-      <main className="container h-[500vh]">
+      <Navbar />
+      <main className="container h-[500vh] mt-20">
         <Outlet />
       </main>
     </>
