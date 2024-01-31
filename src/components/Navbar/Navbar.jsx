@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     <header
       ref={headerRef}
-      className="fixed z-20 w-full top-0 left-0 bg-color-dark-2 transition-all duration-500 shadow-lg"
+      className="fixed z-20 w-full top-0 left-0 bg-color-dark-2 transition-all duration-500 shadow-md"
     >
       <nav className="container flex justify-between items-center py-4">
         <NavbarLogo />
