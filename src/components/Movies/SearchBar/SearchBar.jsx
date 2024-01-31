@@ -1,18 +1,18 @@
 import Button from "../../UI/Button/Button";
 
-const SearchBar = () => {
+const SearchBar = ({ className }) => {
   return (
     <form
       action=""
-      className="hidden w-[300px] lg:w-[350px] sm:flex items-center bg-color-dark-1 rounded-full p-1 gap-2"
+      className={`w-full lg:w-[350px] sm:flex items-center bg-color-dark-1 rounded-full p-1 gap-2 ${className}`}
     >
       <input
         type="search"
-        className="flex-1 bg-transparent outline-none pl-4 text-gray-300 capitalize"
+        className="flex-1 bg-transparent outline-none pl-4 text-gray-400 capitalize"
         placeholder="Search..."
       />
       <Button
-        className="bg-color-dark-2 rounded-full"
+        className="bg-color-primary rounded-full"
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
