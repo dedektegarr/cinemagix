@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const movieSlice = createSlice({
   name: "movie",
-  initialState: { filter: { trending: "day" } },
+  initialState: { filters: { trending: "day" } },
   reducers: {
     filterChange(state, action) {
-      state.filter.trending = action.payload;
+      state.filters.trending = action.payload;
     },
   },
 });

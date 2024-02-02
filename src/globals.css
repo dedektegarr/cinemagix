@@ -5,6 +5,18 @@
 @tailwind utilities;
 
 @layer base {
+  ::-webkit-scrollbar {
+    @apply w-2 h-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-color-dark-1 rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-500 rounded-lg hover:bg-color-dark-3;
+  }
+
   body {
     @apply bg-color-dark-2 text-color-light font-roboto;
   }

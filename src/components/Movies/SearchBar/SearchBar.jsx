@@ -8,7 +8,7 @@ const SearchBar = ({ className }) => {
     >
       <input
         type="search"
-        className="flex-1 bg-transparent outline-none pl-4 text-gray-400 capitalize"
+        className="flex-1 bg-transparent outline-none pl-4 text-color-dark-3 capitalize"
         placeholder="Search..."
       />
       <Button

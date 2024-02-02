@@ -8,7 +8,7 @@ import TvShowsPage from "./pages/TvShows/TvShowsPage";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const filter = useSelector((state) => state.movie.filter.trending);
+  const filter = useSelector((state) => state.movie.filters.trending);
 
   const router = createBrowserRouter([
     {

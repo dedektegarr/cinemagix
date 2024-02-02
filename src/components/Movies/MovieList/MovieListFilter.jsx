@@ -4,7 +4,7 @@ import { movieActions } from "../../../store/movie-slice";
 
 const MovieListFilter = ({ filters }) => {
   const dispatch = useDispatch();
-  const activeFilter = useSelector((state) => state.movie.filter.trending);
+  const activeFilter = useSelector((state) => state.movie.filters.trending);
 
   const handleChangeFilter = (e) => {
     e.preventDefault();
