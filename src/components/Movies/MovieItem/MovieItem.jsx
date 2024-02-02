@@ -3,7 +3,7 @@ import { formatDate } from "../../../utils/format-date";
 
 const MovieItem = ({ movie }) => {
   return (
-    <Link>
+    <Link to="">
       <article>
         <img
           src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}

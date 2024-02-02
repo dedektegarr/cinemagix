@@ -1,11 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useRevalidator } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { movieActions } from "../../../store/movie-slice";
-import { useEffect } from "react";
 
 const MovieListFilter = ({ filters }) => {
   const dispatch = useDispatch();
-  const revalidator = useRevalidator();
   const activeFilter = useSelector((state) => state.movie.filter.trending);
 
   const handleChangeFilter = (e) => {
@@ -14,10 +12,6 @@ const MovieListFilter = ({ filters }) => {
 
     dispatch(movieActions.filterChange(selectedFilter));
   };
-
-  useEffect(() => {
-    revalidator.revalidate();
-  }, [activeFilter]);
 
   return (
     <div className="flex items-center gap-1 text-sm">
