@@ -1,5 +1,6 @@
 import MovieItem from "../MovieItem/MovieItem";
 import MovieListFilter from "./MovieListFilter";
+import { motion } from "framer-motion";
 
 const MovieList = ({ movies, title, filters }) => {
   return (
@@ -8,11 +9,27 @@ const MovieList = ({ movies, title, filters }) => {
         <h2 className="text-2xl font-bold">{title}</h2>
         <MovieListFilter filters={filters} />
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <motion.ul
+        variants={{
+          hidden: { y: 10, opacity: 0.5 },
+          visible: { y: 0, opacity: 1, transition: { staggerChildren: 0.05 } },
+        }}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+      >
         {movies?.map((movie) => (
-          <MovieItem movie={movie} key={movie.id} />
+          <motion.li
+            variants={{
+              hidden: { y: 10, opacity: 0 },
+              visible: { y: 0, opacity: 1 },
+            }}
+            key={movie.id}
+          >
+            <MovieItem movie={movie} />
+          </motion.li>
         ))}
-      </div>
+      </motion.ul>
     </section>
   );
 };
