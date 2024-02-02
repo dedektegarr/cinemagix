@@ -7,13 +7,17 @@ const HomePage = () => {
 
   return (
     <>
-      <MovieList movies={trendingMovies.results} title="Trending" />
+      <MovieList
+        movies={trendingMovies.results}
+        title="Trending"
+        filters={["day", "week"]}
+      />
     </>
   );
 };
 
-export const loader = async () => {
-  const trendingMovies = await fetchTrendingMovies("day");
+export const loader = async ({ filter }) => {
+  const trendingMovies = await fetchTrendingMovies(filter);
   return defer({
     trendingMovies,
   });

@@ -1,14 +1,44 @@
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useRevalidator } from "react-router-dom";
+import { movieActions } from "../../../store/movie-slice";
+import { useEffect } from "react";
 
-const MovieListFilter = () => {
+const MovieListFilter = ({ filters }) => {
+  const dispatch = useDispatch();
+  const revalidator = useRevalidator();
+  const activeFilter = useSelector((state) => state.movie.filter.trending);
+
+  const handleChangeFilter = (e) => {
+    e.preventDefault();
+    const selectedFilter = e.currentTarget.innerText.toLowerCase();
+
+    dispatch(movieActions.filterChange(selectedFilter));
+  };
+
+  useEffect(() => {
+    revalidator.revalidate();
+  }, [activeFilter]);
+
   return (
     <div className="flex items-center gap-1 text-sm">
-      <Link className="py-2 px-4 hover:bg-color-dark-1 bg-color-primary rounded-full">
-        Today
-      </Link>
-      <Link className="py-2 px-4 hover:bg-color-dark-1 rounded-full">
-        This week
-      </Link>
+      {filters.map((filter, i) => {
+        let active = false;
+        if (filter === activeFilter) {
+          active = true;
+        }
+
+        return (
+          <Link
+            onClick={handleChangeFilter}
+            key={i}
+            className={`py-2 px-4 hover:bg-color-primary ${
+              active ? "bg-color-primary" : ""
+            } rounded-full`}
+          >
+            {filter}
+          </Link>
+        );
+      })}
     </div>
   );
 };
