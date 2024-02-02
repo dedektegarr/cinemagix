@@ -7,7 +7,7 @@ const MovieList = ({ movies, title, filters }) => {
     <section>
       <div className="flex items-center gap-6 py-5">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <MovieListFilter filters={filters} />
+        {filters && <MovieListFilter filters={filters} />}
       </div>
       <motion.ul
         variants={{
@@ -16,7 +16,7 @@ const MovieList = ({ movies, title, filters }) => {
         }}
         initial="hidden"
         animate="visible"
-        className="flex max-w-full overflow-x-auto gap-4 overflow-y-hidden pb-8"
+        className="flex max-w-full overflow-x-auto gap-4 overflow-y-hidden pb-6"
       >
         {movies?.map((movie) => (
           <motion.li
