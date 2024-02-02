@@ -12,7 +12,7 @@ const SearchBar = ({ className }) => {
         placeholder="Search..."
       />
       <Button
-        className="bg-color-primary rounded-full"
+        className="bg-color-primary rounded-full hover:bg-color-primary-1"
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"

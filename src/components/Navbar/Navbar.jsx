@@ -2,12 +2,13 @@ import Button from "../UI/Button/Button";
 import SearchBar from "../Movies/SearchBar/SearchBar";
 import NavbarLogo from "./NavbarLogo";
 import NavbarLinks from "./NavbarLinks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(window.scrollY);
+  const isNavMobileOpen = useSelector((state) => state.ui.toggleNavMobile);
   const headerRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -62,15 +63,27 @@ const Navbar = () => {
             rounded={true}
             className="hover:bg-color-dark-1 lg:hidden"
             icon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="30"
-                viewBox="0 -960 960 960"
-                width="30"
-                fill="white"
-              >
-                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-              </svg>
+              isNavMobileOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="30"
+                  viewBox="0 -960 960 960"
+                  width="30"
+                  fill="white"
+                >
+                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="30"
+                  viewBox="0 -960 960 960"
+                  width="30"
+                  fill="white"
+                >
+                  <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg>
+              )
             }
           />
         </div>
