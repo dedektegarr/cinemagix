@@ -1,8 +1,8 @@
 import { fetchData } from "../utils/fetch-data";
 
-export const fetchPopularMovies = async () => {
+export const fetchPopularMovies = async (filter) => {
   const resources = {
-    resource: `movie/popular`,
+    resource: `${filter}/popular`,
   };
 
   const data = await fetchData(resources);

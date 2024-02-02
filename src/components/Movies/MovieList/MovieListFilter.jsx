@@ -2,22 +2,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { movieActions } from "../../../store/movie-slice";
 
-const MovieListFilter = ({ filters }) => {
+const MovieListFilter = ({ filters, section }) => {
   const dispatch = useDispatch();
-  const activeFilter = useSelector((state) => state.movie.filters.trending);
+  const activeFilter = useSelector((state) => state.movie.filters[section]);
 
   const handleChangeFilter = (e) => {
     e.preventDefault();
     const selectedFilter = e.currentTarget.innerText.toLowerCase();
 
-    dispatch(movieActions.filterChange(selectedFilter));
+    dispatch(movieActions.filterChange({ section, selectedFilter }));
   };
 
   return (
     <div className="flex items-center gap-1 text-sm">
       {filters.map((filter, i) => {
         let active = false;
-        if (filter === activeFilter) {
+        if (filter.toLowerCase() === activeFilter.toLowerCase()) {
           active = true;
         }
 

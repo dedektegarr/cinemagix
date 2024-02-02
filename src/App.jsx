@@ -1,14 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import HomePage, {
-  loader as trendingMoviesLoader,
+  loader as homePageMoviesLoader,
 } from "./pages/Home/HomePage";
 import MoviesPage from "./pages/Movies/MoviesPage";
 import TvShowsPage from "./pages/TvShows/TvShowsPage";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const filter = useSelector((state) => state.movie.filters.trending);
+  const filters = useSelector((state) => state.movie.filters);
 
   const router = createBrowserRouter([
     {
@@ -18,7 +18,7 @@ const App = () => {
         {
           index: true,
           element: <HomePage />,
-          loader: () => trendingMoviesLoader({ filter }),
+          loader: () => homePageMoviesLoader({ filters }),
         },
         { path: "movies", element: <MoviesPage /> },
         { path: "tv", element: <TvShowsPage /> },

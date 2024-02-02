@@ -11,9 +11,9 @@ const MovieItem = ({ movie }) => {
           className="w-full h-[210px] lg:h-[350px] object-cover rounded-md shadow-lg"
         />
         <div className="p-1 mt-2">
-          <h3 className="font-bold">{movie.title}</h3>
+          <h3 className="font-bold">{movie.title || movie.name}</h3>
           <p className="mt-1 text-sm text-color-dark-3">
-            {formatDate(movie.release_date)}
+            {formatDate(movie.release_date || movie.first_air_date)}
           </p>
         </div>
       </article>

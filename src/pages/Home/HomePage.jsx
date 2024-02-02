@@ -11,16 +11,22 @@ const HomePage = () => {
       <MovieList
         movies={trendingMovies.results}
         title="Trending"
-        filters={["day", "week"]}
+        filters={["Day", "Week"]}
+        section="trending"
       />
-      <MovieList movies={popularMovies.results} title="Popular Now" />
+      <MovieList
+        movies={popularMovies.results}
+        title="Popular Now"
+        filters={["Movie", "Tv"]}
+        section="popular"
+      />
     </div>
   );
 };
 
-export const loader = async ({ filter }) => {
-  const trendingMovies = await fetchTrendingMovies(filter);
-  const popularMovies = await fetchPopularMovies();
+export const loader = async ({ filters }) => {
+  const trendingMovies = await fetchTrendingMovies(filters.trending);
+  const popularMovies = await fetchPopularMovies(filters.popular);
   return defer({
     trendingMovies,
     popularMovies,

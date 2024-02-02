@@ -6,11 +6,11 @@
 
 @layer base {
   ::-webkit-scrollbar {
-    @apply w-2 h-1;
+    @apply w-2 h-[5px];
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-color-dark-1 rounded-lg;
+    @apply bg-color-dark-2 rounded-lg;
   }
 
   ::-webkit-scrollbar-thumb {
