@@ -22,7 +22,7 @@ const BannerCarouselItem = ({ item }) => {
         <img
           src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}
           alt="Movie poster"
-          className="rounded-md h-[200px] md:h-[280px] w-auto shadow-lg"
+          className="hidden md:block rounded-md h-[200px] md:h-[280px] w-auto shadow-lg"
           effect="blur"
         />
         <div className="max-w-[600px]">

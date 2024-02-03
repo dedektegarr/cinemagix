@@ -27,7 +27,7 @@ const MovieList = ({ movies, title, filters, section }) => {
             }}
             key={movie.id}
           >
-            <MovieItem movie={movie} />
+            <MovieItem width={300} movie={movie} />
           </motion.li>
         ))}
       </motion.ul>

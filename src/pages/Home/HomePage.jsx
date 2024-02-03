@@ -5,13 +5,15 @@ import fetchPopularMovies from "../../api/popular-movies";
 import BannerCarousel from "../../components/Movies/BannerCarousel/BannerCarousel";
 import fetchNowPlayingMovies from "../../api/now-playing-movies";
 import Hero from "../../components/Movies/Hero/Hero";
+import fetchUpcomingMovies from "../../api/upcoming-movies";
 
 const HomePage = () => {
-  const { trendingMovies, popularMovies, nowPlayingMovies } = useLoaderData();
+  const { trendingMovies, popularMovies, nowPlayingMovies, upcomingMovies } =
+    useLoaderData();
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8 -mt-20">
-      <Hero />
+      <Hero data={upcomingMovies} />
       <div className="container">
         <BannerCarousel
           title="Now Playing"
@@ -49,10 +51,13 @@ export const loader = async ({ filters }) => {
   const trendingMovies = await fetchTrendingMovies(filters.trending);
   const popularMovies = await fetchPopularMovies(filters.popular);
   const nowPlayingMovies = await fetchNowPlayingMovies(filters.popular);
+  const upcomingMovies = await fetchUpcomingMovies();
+
   return defer({
     trendingMovies,
     popularMovies,
     nowPlayingMovies,
+    upcomingMovies,
   });
 };
 
