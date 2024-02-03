@@ -8,7 +8,7 @@ const MovieListFilter = ({ filters, section }) => {
 
   const handleChangeFilter = (e) => {
     e.preventDefault();
-    const selectedFilter = e.currentTarget.innerText.toLowerCase();
+    const selectedFilter = e.currentTarget.id.toLowerCase();
 
     dispatch(movieActions.filterChange({ section, selectedFilter }));
   };
@@ -17,7 +17,7 @@ const MovieListFilter = ({ filters, section }) => {
     <div className="flex items-center gap-1 text-sm">
       {filters.map((filter, i) => {
         let active = false;
-        if (filter.toLowerCase() === activeFilter.toLowerCase()) {
+        if (filter.value.toLowerCase() === activeFilter.toLowerCase()) {
           active = true;
         }
 
@@ -25,11 +25,12 @@ const MovieListFilter = ({ filters, section }) => {
           <Link
             onClick={handleChangeFilter}
             key={i}
+            id={filter.value}
             className={`py-2 px-4 hover:bg-color-primary ${
               active ? "bg-color-primary" : ""
             } rounded-full`}
           >
-            {filter}
+            {filter.label}
           </Link>
         );
       })}

@@ -11,13 +11,19 @@ const HomePage = () => {
       <MovieList
         movies={trendingMovies.results}
         title="Trending"
-        filters={["Day", "Week"]}
+        filters={[
+          { label: "Today", value: "day" },
+          { label: "This Week", value: "week" },
+        ]}
         section="trending"
       />
       <MovieList
         movies={popularMovies.results}
         title="Popular Now"
-        filters={["Movie", "Tv"]}
+        filters={[
+          { label: "Streaming", value: "movie" },
+          { label: "On Tv", value: "tv" },
+        ]}
         section="popular"
       />
     </div>
