@@ -1,7 +1,7 @@
 const HeroCarouselItem = ({ item, activeItem, onSelect }) => {
   return (
     <div
-      className={`relative shadow-md rounded-lg mx-2 overflow-hidden transition-all duration-300 bg-indigo-700 scale-100 cursor-pointer ${
+      className={`relative shadow-md rounded-lg mx-2 overflow-hidden transition-all duration-300 bg-color-primary scale-100 cursor-pointer ${
         activeItem.id === item.id ? "-translate-y-4" : ""
       }`}
       onClick={() => onSelect(item)}

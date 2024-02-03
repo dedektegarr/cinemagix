@@ -17,7 +17,7 @@ const MovieList = ({ movies, title, filters, section }) => {
         initial="hidden"
         animate="visible"
         exit="hidden"
-        className="flex max-w-full overflow-x-auto gap-4 overflow-y-hidden pb-6"
+        className="flex max-w-full min-h-[350px] md:min-h-[430px] overflow-x-auto gap-4 overflow-y-hidden pb-6"
       >
         {movies?.map((movie) => (
           <motion.li
