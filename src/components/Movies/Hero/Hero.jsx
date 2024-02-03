@@ -25,7 +25,7 @@ const Hero = ({ data }) => {
       ref={sectionRef}
       className="relative h-screen bg-indigo-700 flex items-center"
     >
-      <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-color-dark-2 to-color-dark-2/50"></div>
+      <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-color-dark-2 to-color-dark-2/40"></div>
       <div className="relative container grid grid-cols-2 gap-10 items-center min-h-[340px]">
         <div>
           <ul ref={scope}>
