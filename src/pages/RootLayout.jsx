@@ -26,7 +26,7 @@ const RootLayout = () => {
       <AnimatePresence>{showMobileNav && <NavbarMobile />}</AnimatePresence>
 
       <Navbar />
-      <main className="container h-[500vh] mt-20">
+      <main className="mt-20">
         <Outlet />
       </main>
     </>

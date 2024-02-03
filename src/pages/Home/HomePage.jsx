@@ -4,35 +4,43 @@ import MovieList from "../../components/Movies/MovieList/MovieList";
 import fetchPopularMovies from "../../api/popular-movies";
 import BannerCarousel from "../../components/Movies/BannerCarousel/BannerCarousel";
 import fetchNowPlayingMovies from "../../api/now-playing-movies";
+import Hero from "../../components/Movies/Hero/Hero";
 
 const HomePage = () => {
   const { trendingMovies, popularMovies, nowPlayingMovies } = useLoaderData();
 
   return (
-    <div className="flex flex-col gap-4 lg:gap-8">
-      <BannerCarousel
-        title="Now Playing"
-        dates={nowPlayingMovies.dates}
-        items={nowPlayingMovies.results}
-      />
-      <MovieList
-        movies={trendingMovies.results}
-        title="Trending"
-        filters={[
-          { label: "Today", value: "day" },
-          { label: "This Week", value: "week" },
-        ]}
-        section="trending"
-      />
-      <MovieList
-        movies={popularMovies.results}
-        title="Popular"
-        filters={[
-          { label: "Streaming", value: "movie" },
-          { label: "On Tv", value: "tv" },
-        ]}
-        section="popular"
-      />
+    <div className="flex flex-col gap-4 lg:gap-8 -mt-20">
+      <Hero />
+      <div className="container">
+        <BannerCarousel
+          title="Now Playing"
+          dates={nowPlayingMovies.dates}
+          items={nowPlayingMovies.results}
+        />
+      </div>
+      <div className="container">
+        <MovieList
+          movies={trendingMovies.results}
+          title="Trending"
+          filters={[
+            { label: "Today", value: "day" },
+            { label: "This Week", value: "week" },
+          ]}
+          section="trending"
+        />
+      </div>
+      <div className="container">
+        <MovieList
+          movies={popularMovies.results}
+          title="Popular"
+          filters={[
+            { label: "Streaming", value: "movie" },
+            { label: "On Tv", value: "tv" },
+          ]}
+          section="popular"
+        />
+      </div>
     </div>
   );
 };

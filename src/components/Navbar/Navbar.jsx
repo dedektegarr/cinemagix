@@ -20,6 +20,14 @@ const Navbar = () => {
     const handleScroll = () => {
       const prevScroll = window.scrollY;
 
+      if (prevScroll > 100) {
+        headerRef.current.style.backgroundColor = "#222831";
+        headerRef.current.style.boxShadow = "0 0 15px 0 rgba(0,0,0,.3)";
+      } else {
+        headerRef.current.style.boxShadow = "none";
+        headerRef.current.style.backgroundColor = "transparent";
+      }
+
       if (prevScroll > scroll) {
         headerRef.current.style.top = "-6rem";
       } else {
@@ -36,7 +44,7 @@ const Navbar = () => {
   return (
     <header
       ref={headerRef}
-      className="fixed z-20 w-full top-0 left-0 bg-color-dark-2 transition-all duration-500 shadow-md"
+      className="fixed z-20 w-full top-0 left-0 bg-transparent transition-all duration-500"
     >
       <nav className="container flex justify-between items-center py-4">
         <NavbarLogo />
