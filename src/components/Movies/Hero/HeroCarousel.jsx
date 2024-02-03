@@ -15,19 +15,24 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 4,
-    slidesToSlide: 2,
+    items: 3,
+    slidesToSlide: 3,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 4,
-    slidesToSlide: 2,
+    items: 3,
+    slidesToSlide: 3,
   },
 };
 
 const HeroCarousel = ({ items, onSelect, activeItem }) => {
   return (
-    <Carousel responsive={responsive} className="overflow-hidden pt-5">
+    <Carousel
+      showDots={true}
+      // removeArrowOnDeviceType={["mobile"]}
+      responsive={responsive}
+      className="overflow-hidden pt-5 pb-10 -mb-10"
+    >
       {items.map((item) => (
         <HeroCarouselItem
           key={item.id}

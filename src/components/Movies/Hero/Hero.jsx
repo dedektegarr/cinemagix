@@ -26,7 +26,7 @@ const Hero = ({ data }) => {
       className="relative h-screen bg-indigo-700 flex items-center"
     >
       <div className="absolute h-full w-full top-0 left-0 bg-gradient-to-t from-color-dark-2 to-color-dark-2/40"></div>
-      <div className="relative container grid grid-cols-2 gap-10 items-center min-h-[340px]">
+      <div className="relative container grid  grid-cols-1 md:grid-cols-2 gap-10 items-center min-h-[340px]">
         <div>
           <ul ref={scope}>
             <motion.li initial={{ x: -50, opacity: 0 }}>
@@ -58,7 +58,7 @@ const Hero = ({ data }) => {
         </div>
 
         <div className="self-end">
-          <div className="max-w-[500px] 2xl:max-w-[600px] ml-auto">
+          <div className="max-w-full xl:max-w-[500px] 2xl:max-w-[600px] ml-auto">
             <HeroCarousel
               items={data.results}
               activeItem={displayedItem}

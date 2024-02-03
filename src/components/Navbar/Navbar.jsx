@@ -5,16 +5,26 @@ import NavbarLinks from "./NavbarLinks";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(window.scrollY);
   const isNavMobileOpen = useSelector((state) => state.ui.toggleNavMobile);
   const headerRef = useRef(null);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const handleToggleNav = () => {
     dispatch(uiActions.toggle());
   };
+
+  useEffect(() => {
+    if (isNavMobileOpen) {
+      headerRef.current.style.backgroundColor = "#222831";
+    } else {
+      headerRef.current.style.backgroundColor = "transparent";
+    }
+  }, [isNavMobileOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +54,9 @@ const Navbar = () => {
   return (
     <header
       ref={headerRef}
-      className="fixed z-20 w-full top-0 left-0 bg-transparent transition-all duration-500"
+      className={`fixed z-20 w-full top-0 left-0 ${
+        pathname === "/" ? "bg-transparent" : "bg-color-dark-2"
+      } transition-all duration-500`}
     >
       <nav className="container flex justify-between items-center py-4">
         <NavbarLogo />

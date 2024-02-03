@@ -25,7 +25,7 @@ const responsive = {
 const BannerCarousel = ({ title, dates, items }) => {
   return (
     <section>
-      <div className="flex items-center justify-between gap-5 py-5">
+      <div className="flex items-center justify-between gap-5 py-6">
         {title && <h2 className="text-2xl font-bold">{title}</h2>}
 
         <p className="text-sm md:text-base text-color-primary">
@@ -35,7 +35,7 @@ const BannerCarousel = ({ title, dates, items }) => {
       </div>
 
       <Carousel
-        removeArrowOnDeviceType={["mobile"]}
+        removeArrowOnDeviceType={["mobile", "tablet"]}
         infinite={true}
         autoPlay={true}
         autoPlaySpeed={4000}

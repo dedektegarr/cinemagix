@@ -15,7 +15,7 @@ const BannerCarouselItem = ({ item }) => {
   return (
     <div
       ref={containerRef}
-      className={`relative h-auto bg-color-primary overflow-hidden p-8 rounded-xl`}
+      className={`relative h-auto bg-color-primary overflow-hidden p-8 rounded-xl shadow-lg`}
     >
       <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-color-dark-1 to-color-dark-1/40"></div>
       <div className="flex flex-col md:flex-row items-center gap-6 relative">

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const MovieList = ({ movies, title, filters, section }) => {
   return (
     <section>
-      <div className="flex items-center gap-6 py-5">
+      <div className="flex items-center gap-6 py-6">
         <h2 className="text-2xl font-bold">{title}</h2>
         {filters && <MovieListFilter filters={filters} section={section} />}
       </div>
