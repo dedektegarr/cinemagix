@@ -27,7 +27,7 @@ const responsive = {
 
 const HeroCarousel = ({ items, onSelect, activeItem }) => {
   return (
-    <Carousel responsive={responsive} className="overflow-hidden py-4">
+    <Carousel responsive={responsive} className="overflow-hidden pt-5">
       {items.map((item) => (
         <HeroCarouselItem
           key={item.id}
