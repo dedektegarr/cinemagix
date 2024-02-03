@@ -3,13 +3,18 @@ import { fetchTrendingMovies } from "../../api/trending-movies";
 import MovieList from "../../components/Movies/MovieList/MovieList";
 import fetchPopularMovies from "../../api/popular-movies";
 import BannerCarousel from "../../components/Movies/BannerCarousel/BannerCarousel";
+import fetchNowPlayingMovies from "../../api/now-playing-movies";
 
 const HomePage = () => {
-  const { trendingMovies, popularMovies } = useLoaderData();
+  const { trendingMovies, popularMovies, nowPlayingMovies } = useLoaderData();
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
-      <BannerCarousel />
+      <BannerCarousel
+        title="Now Playing"
+        dates={nowPlayingMovies.dates}
+        items={nowPlayingMovies.results}
+      />
       <MovieList
         movies={trendingMovies.results}
         title="Trending"
@@ -21,7 +26,7 @@ const HomePage = () => {
       />
       <MovieList
         movies={popularMovies.results}
-        title="Popular Now"
+        title="Popular"
         filters={[
           { label: "Streaming", value: "movie" },
           { label: "On Tv", value: "tv" },
@@ -35,9 +40,11 @@ const HomePage = () => {
 export const loader = async ({ filters }) => {
   const trendingMovies = await fetchTrendingMovies(filters.trending);
   const popularMovies = await fetchPopularMovies(filters.popular);
+  const nowPlayingMovies = await fetchNowPlayingMovies(filters.popular);
   return defer({
     trendingMovies,
     popularMovies,
+    nowPlayingMovies,
   });
 };
 
