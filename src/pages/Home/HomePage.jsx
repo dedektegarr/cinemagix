@@ -2,12 +2,14 @@ import { defer, useLoaderData } from "react-router-dom";
 import { fetchTrendingMovies } from "../../api/trending-movies";
 import MovieList from "../../components/Movies/MovieList/MovieList";
 import fetchPopularMovies from "../../api/popular-movies";
+import BannerCarousel from "../../components/Movies/BannerCarousel/BannerCarousel";
 
 const HomePage = () => {
   const { trendingMovies, popularMovies } = useLoaderData();
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
+      <BannerCarousel />
       <MovieList
         movies={trendingMovies.results}
         title="Trending"
