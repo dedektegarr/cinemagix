@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <header
       ref={headerRef}
-      className={`fixed z-20 w-full top-0 left-0 ${
+      className={`fixed z-[2000] w-full top-0 left-0 ${
         pathname === "/" ? "bg-transparent" : "bg-color-dark-2"
       } transition-all duration-500`}
     >
