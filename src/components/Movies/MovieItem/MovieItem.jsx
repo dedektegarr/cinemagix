@@ -13,15 +13,15 @@ const MovieItem = ({ movie }) => {
   }
 
   return (
-    <Link to="">
-      <article className={`relative w-[150px] lg:w-[200px]`}>
+    <Link to={`movies/${movie.id}`}>
+      <article className={`relative w-[150px] lg:w-[200px] group`}>
         <div
           className={`bg-black/80 rounded-full p-2 text-xs border-2 ${ratingColor} absolute top-2 left-2 z-10`}
         >
           {movie.vote_average.toFixed(1)}
         </div>
         <div>
-          <div className="relative group overflow-hidden rounded-md">
+          <div className="relative overflow-hidden rounded-md">
             <div
               className="opacity-0 group-hover:opacity-100 z-20 p-4 flex items-end transition ease-in-out duration-300 absolute 
             bottom-0 left-0 w-full h-full bg-gradient-to-t from-black to to-black/30"
@@ -39,7 +39,9 @@ const MovieItem = ({ movie }) => {
           </div>
 
           <div className="p-1 mt-2">
-            <h3 className="font-bold">{movie.title || movie.name}</h3>
+            <h3 className="font-bold transition group-hover:text-color-primary">
+              {movie.title || movie.name}
+            </h3>
             <p className="mt-1 text-sm text-color-dark-3">
               {formatDate(movie.release_date || movie.first_air_date)}
             </p>
