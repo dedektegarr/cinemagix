@@ -5,14 +5,62 @@ import Button from "../../components/UI/Button/Button";
 
 const DetailsPage = () => {
   const sectionRef = useRef(null);
+  const ageRatingRef = useRef(null);
 
-  const { details } = useLoaderData();
-  const { title, overview, tagline, backdrop_path } = details;
+  const { details, ageRatings, videos } = useLoaderData();
+  const {
+    title,
+    release_date,
+    genres,
+    runtime,
+    overview,
+    tagline,
+    backdrop_path,
+  } = details;
 
-  useEffect(() => {
+  const getTrailer = () => {
+    const trailer = videos.results.find(
+      (video) => video.type.toLowerCase() === "trailer"
+    );
+
+    return trailer.key;
+  };
+
+  const getAgeRatings = async () => {
+    const ratingInUS = ageRatings.results
+      .find((rating) => rating.iso_3166_1 === "US")
+      .release_dates.filter(
+        (rating) => rating.certification.length > 0
+      )[0].certification;
+
+    ageRatingRef.current.textContent = ratingInUS;
+  };
+
+  const convertRuntime = (runtime) => {
+    const hour = Math.floor(runtime / 60);
+    const minute = runtime % 60;
+
+    return `${hour}h ${minute}m`;
+  };
+
+  const getDates = (date) => {
+    const newDate = new Date(date);
+    return {
+      date: newDate.getDay(),
+      month: newDate.getMonth(),
+      year: newDate.getFullYear(),
+    };
+  };
+
+  const setSectionBackground = () => {
     sectionRef.current.style.background = `url('https://image.tmdb.org/t/p/original${backdrop_path})`;
     sectionRef.current.style.backgroundPosition = `top`;
     sectionRef.current.style.backgroundSize = `cover`;
+  };
+
+  useEffect(() => {
+    setSectionBackground();
+    getAgeRatings();
   }, []);
 
   return (
@@ -23,14 +71,14 @@ const DetailsPage = () => {
       >
         <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-color-dark-2 to-color-dark-2/0"></div>
 
-        <div className="relative max-w-[500px]">
+        <div className="relative max-w-[600px]">
           <h1 className="text-4xl font-bold">{title}</h1>
           <blockquote className="text-sm mt-2 italic">{tagline}</blockquote>
           <div className="divide-x-2 my-4 divide-color-dark-3 text-color-dark-3">
-            <span className="pr-3">2016</span>
-            <span className="px-3">13+</span>
-            <span className="px-3">1j 32m</span>
-            <span className="pl-3">Komedi</span>
+            <span className="pr-3">{getDates(release_date).year}</span>
+            <span className="px-3" ref={ageRatingRef}></span>
+            <span className="px-3">{convertRuntime(runtime)}</span>
+            <span className="pl-3">{genres[0].name}</span>
           </div>
 
           <p className="leading-relaxed">{overview}</p>
@@ -52,6 +100,8 @@ const DetailsPage = () => {
               }
             ></Button>
             <Button
+              target="_blank"
+              href={`https://www.youtube.com/watch?v=${getTrailer()}`}
               className="hover:text-slate-300"
               icon={
                 <svg
@@ -76,8 +126,17 @@ const DetailsPage = () => {
 
 export const loader = async ({ params }) => {
   const details = await fetchMovieDetails({ movieId: params.movie_id });
+  const ageRatings = await fetchMovieDetails({
+    movieId: `${params.movie_id}/release_dates`,
+  });
+  const videos = await fetchMovieDetails({
+    movieId: `${params.movie_id}/videos`,
+  });
+
   return defer({
     details,
+    ageRatings,
+    videos,
   });
 };
 
