@@ -1,19 +1,27 @@
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, Link, defer, useLoaderData } from "react-router-dom";
 import fetchMovieDetails from "../../api/movie-details";
 import { useEffect, useRef } from "react";
 import Button from "../../components/UI/Button/Button";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import Section from "../../components/utils/Section";
 import SlideHorizontal from "../../components/utils/SlideHorizontal";
 import Card from "../../components/utils/Card";
+import MovieList from "../../components/Movies/MovieList/MovieList";
+import MovieReview from "../../components/Movies/MovieReview/MovieReview";
 
 const DetailsPage = () => {
   const sectionRef = useRef(null);
   const ageRatingRef = useRef(null);
   const trailerButtonRef = useRef(null);
 
-  const { details, ageRatings, recommendations, keywords, videos, credits } =
-    useLoaderData();
+  const {
+    details,
+    ageRatings,
+    reviews,
+    recommendations,
+    keywords,
+    videos,
+    credits,
+  } = useLoaderData();
 
   const {
     title,
@@ -141,7 +149,7 @@ const DetailsPage = () => {
       <div className="grid grid-cols-12 gap-4 container">
         <div className="col-span-9">
           {/* CREDITS */}
-          <Section className="container">
+          <Section>
             <Section.Header title="Top Billed Cast" />
 
             <SlideHorizontal>
@@ -165,6 +173,46 @@ const DetailsPage = () => {
                   }
                 />
               </ul>
+            </SlideHorizontal>
+          </Section>
+
+          {/* REVIEWS */}
+          <Section>
+            <Section.Header title="Reviews">
+              <Link
+                to="reviews"
+                className="ml-auto text-sm text-color-dark-3 hover:text-color-primary"
+              >
+                View All Reviews
+              </Link>
+            </Section.Header>
+
+            <Await
+              resolve={reviews}
+              children={(reviews) => (
+                <MovieReview review={reviews.results[0]} />
+              )}
+            />
+          </Section>
+
+          {/* MEDIA */}
+          <Section>
+            <Section.Header title="Videos" />
+
+            <h1>Video </h1>
+          </Section>
+
+          {/* RECOMMENDATIONS */}
+          <Section>
+            <Section.Header title="Recommendations" />
+
+            <SlideHorizontal>
+              <Await
+                resolve={recommendations}
+                children={(recommendations) => (
+                  <MovieList movies={recommendations.results} />
+                )}
+              />
             </SlideHorizontal>
           </Section>
         </div>
@@ -233,6 +281,9 @@ export const loader = async ({ params }) => {
   const recommendations = fetchMovieDetails({
     movieId: `${params.movie_id}/recommendations`,
   });
+  const reviews = fetchMovieDetails({
+    movieId: `${params.movie_id}/reviews`,
+  });
 
   return defer({
     details,
@@ -241,6 +292,7 @@ export const loader = async ({ params }) => {
     credits,
     keywords,
     recommendations,
+    reviews,
   });
 };
 
