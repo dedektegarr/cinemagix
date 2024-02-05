@@ -1,32 +1,37 @@
-const Button = ({ icon, className, children, href, rounded, ...props }) => {
-  let paddings = "py-2 px-3";
+import { forwardRef } from "react";
 
-  if (rounded) {
-    paddings = "p-2 rounded-full";
-  }
+const Button = forwardRef(
+  ({ icon, className, children, href, rounded, ...props }, ref) => {
+    let paddings = "py-2 px-3";
 
-  if (href) {
+    if (rounded) {
+      paddings = "p-2 rounded-full";
+    }
+
+    if (href) {
+      return (
+        <a
+          ref={ref}
+          href={href}
+          className={`${className} ${paddings} flex items-center justify-center gap-2`}
+          {...props}
+        >
+          {icon && icon}
+          {children && children}
+        </a>
+      );
+    }
+
     return (
-      <a
-        href={href}
+      <button
         className={`${className} ${paddings} flex items-center justify-center gap-2`}
         {...props}
       >
         {icon && icon}
         {children && children}
-      </a>
+      </button>
     );
   }
-
-  return (
-    <button
-      className={`${className} ${paddings} flex items-center justify-center gap-2`}
-      {...props}
-    >
-      {icon && icon}
-      {children && children}
-    </button>
-  );
-};
+);
 
 export default Button;

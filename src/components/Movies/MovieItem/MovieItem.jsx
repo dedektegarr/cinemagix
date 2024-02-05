@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { formatDate } from "../../../utils/format-date";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const MovieItem = ({ movie }) => {
   let ratingColor;

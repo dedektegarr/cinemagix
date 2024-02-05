@@ -1,13 +1,16 @@
-import { defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData } from "react-router-dom";
 import fetchMovieDetails from "../../api/movie-details";
 import { useEffect, useRef } from "react";
 import Button from "../../components/UI/Button/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const DetailsPage = () => {
   const sectionRef = useRef(null);
   const ageRatingRef = useRef(null);
+  const trailerButtonRef = useRef(null);
 
-  const { details, ageRatings, videos } = useLoaderData();
+  const { details, ageRatings, videos, credits } = useLoaderData();
+
   const {
     title,
     release_date,
@@ -18,12 +21,13 @@ const DetailsPage = () => {
     backdrop_path,
   } = details;
 
-  const getTrailer = () => {
-    const trailer = videos.results.find(
+  const getTrailer = async () => {
+    const trailers = await videos;
+    const trailer = trailers.results.find(
       (video) => video.type.toLowerCase() === "trailer"
     );
 
-    return trailer.key;
+    trailerButtonRef.current.href += trailer.key;
   };
 
   const getAgeRatings = async () => {
@@ -61,6 +65,7 @@ const DetailsPage = () => {
   useEffect(() => {
     setSectionBackground();
     getAgeRatings();
+    getTrailer();
   }, []);
 
   return (
@@ -71,7 +76,7 @@ const DetailsPage = () => {
       >
         <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-color-dark-2 to-color-dark-2/0"></div>
 
-        <div className="relative max-w-[600px]">
+        <div className="relative max-w-[600px] p-8">
           <h1 className="text-4xl font-bold">{title}</h1>
           <blockquote className="text-sm mt-2 italic">{tagline}</blockquote>
           <div className="divide-x-2 my-4 divide-color-dark-3 text-color-dark-3">
@@ -100,8 +105,9 @@ const DetailsPage = () => {
               }
             ></Button>
             <Button
+              ref={trailerButtonRef}
               target="_blank"
-              href={`https://www.youtube.com/watch?v=${getTrailer()}`}
+              href={`https://www.youtube.com/watch?v=`}
               className="hover:text-slate-300"
               icon={
                 <svg
@@ -120,6 +126,34 @@ const DetailsPage = () => {
           </div>
         </div>
       </section>
+
+      <div className="grid grid-cols-12 gap-4 container">
+        <section className="col-span-9">
+          <h2 className="text-2xl my-5 font-bold">Top Billed Cast</h2>
+          <div className="flex overflow-x-auto gap-4">
+            <Await
+              resolve={credits}
+              children={(credits) =>
+                credits.cast.map((cast) => (
+                  <div key={cast.cast_id} className="min-w-[150px]">
+                    <LazyLoadImage
+                      effect="blur"
+                      className="block w-full h-auto rounded-lg shadow-lg"
+                      src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
+                      alt="cast"
+                    />
+                    <h3 className="py-1">{cast.name}</h3>
+                    <p className="text-sm text-color-dark-3">
+                      {cast.character}
+                    </p>
+                  </div>
+                ))
+              }
+            />
+          </div>
+        </section>
+        <div className="col-span-3">hai</div>
+      </div>
     </div>
   );
 };
@@ -129,14 +163,18 @@ export const loader = async ({ params }) => {
   const ageRatings = await fetchMovieDetails({
     movieId: `${params.movie_id}/release_dates`,
   });
-  const videos = await fetchMovieDetails({
+  const videos = fetchMovieDetails({
     movieId: `${params.movie_id}/videos`,
+  });
+  const credits = fetchMovieDetails({
+    movieId: `${params.movie_id}/credits`,
   });
 
   return defer({
     details,
     ageRatings,
     videos,
+    credits,
   });
 };
 
