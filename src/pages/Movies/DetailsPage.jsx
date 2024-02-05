@@ -9,7 +9,8 @@ const DetailsPage = () => {
   const ageRatingRef = useRef(null);
   const trailerButtonRef = useRef(null);
 
-  const { details, ageRatings, videos, credits } = useLoaderData();
+  const { details, ageRatings, recommendations, keywords, videos, credits } =
+    useLoaderData();
 
   const {
     title,
@@ -20,6 +21,13 @@ const DetailsPage = () => {
     tagline,
     backdrop_path,
   } = details;
+
+  const currencyFormat = (value) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(value);
+  };
 
   const getTrailer = async () => {
     const trailers = await videos;
@@ -79,7 +87,7 @@ const DetailsPage = () => {
         <div className="relative max-w-[600px] p-8">
           <h1 className="text-4xl font-bold">{title}</h1>
           <blockquote className="text-sm mt-2 italic">{tagline}</blockquote>
-          <div className="divide-x-2 my-4 divide-color-dark-3 text-color-dark-3">
+          <div className="divide-x my-4 divide-color-dark-3 text-color-dark-3">
             <span className="pr-3">{getDates(release_date).year}</span>
             <span className="px-3" ref={ageRatingRef}></span>
             <span className="px-3">{convertRuntime(runtime)}</span>
@@ -128,31 +136,99 @@ const DetailsPage = () => {
       </section>
 
       <div className="grid grid-cols-12 gap-4 container">
-        <section className="col-span-9">
-          <h2 className="text-2xl my-5 font-bold">Top Billed Cast</h2>
-          <div className="flex overflow-x-auto gap-4">
-            <Await
-              resolve={credits}
-              children={(credits) =>
-                credits.cast.map((cast) => (
-                  <div key={cast.cast_id} className="min-w-[150px]">
-                    <LazyLoadImage
-                      effect="blur"
-                      className="block w-full h-auto rounded-lg shadow-lg"
-                      src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
-                      alt="cast"
-                    />
-                    <h3 className="py-1">{cast.name}</h3>
-                    <p className="text-sm text-color-dark-3">
-                      {cast.character}
-                    </p>
-                  </div>
-                ))
-              }
-            />
+        <div className="col-span-9">
+          <section>
+            <h2 className="text-2xl my-5 font-bold">Top Billed Cast</h2>
+            <div className="flex overflow-x-auto gap-4">
+              <Await
+                resolve={credits}
+                children={(credits) =>
+                  credits.cast.map((cast) => (
+                    <div key={cast.cast_id} className="min-w-[150px]">
+                      <LazyLoadImage
+                        effect="blur"
+                        className="block w-full h-auto rounded-lg shadow-lg"
+                        src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
+                        alt="cast"
+                      />
+                      <h3 className="py-1">{cast.name}</h3>
+                      <p className="text-sm text-color-dark-3">
+                        {cast.character}
+                      </p>
+                    </div>
+                  ))
+                }
+              />
+            </div>
+          </section>
+          <section>
+            <h2 className="text-2xl my-5 font-bold">Top Billed Cast</h2>
+            <div className="flex overflow-x-auto gap-4">
+              <Await
+                resolve={credits}
+                children={(credits) =>
+                  credits.cast.map((cast) => (
+                    <div key={cast.cast_id} className="min-w-[150px]">
+                      <LazyLoadImage
+                        effect="blur"
+                        className="block w-full h-auto rounded-lg shadow-lg"
+                        src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
+                        alt="cast"
+                      />
+                      <h3 className="py-1">{cast.name}</h3>
+                      <p className="text-sm text-color-dark-3">
+                        {cast.character}
+                      </p>
+                    </div>
+                  ))
+                }
+              />
+            </div>
+          </section>
+        </div>
+
+        <div className="col-span-3 py-5 px-3 flex flex-col gap-4">
+          <div>
+            <p className="font-bold">Status</p>
+            <p className="text-color-dark-3">{details.status}</p>
           </div>
-        </section>
-        <div className="col-span-3">hai</div>
+          <div>
+            <p className="font-bold">Originial Language</p>
+            <p className="text-color-dark-3">
+              {details.original_language.toUpperCase()}
+            </p>
+          </div>
+          <div>
+            <p className="font-bold">Budget</p>
+            <p className="text-color-dark-3">
+              {currencyFormat(details.budget)}
+            </p>
+          </div>
+          <div>
+            <p className="font-bold">Revenue</p>
+            <p className="text-color-dark-3">
+              {currencyFormat(details.revenue)}
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bold mb-2">Keywords</h3>
+            <div className="flex flex-wrap gap-1">
+              <Await
+                resolve={keywords}
+                children={(keywords) =>
+                  keywords.keywords.map((keyword) => (
+                    <p
+                      key={keyword.id}
+                      className="py-2 px-3 bg-color-dark-1 rounded-md text-xs"
+                    >
+                      {keyword.name}
+                    </p>
+                  ))
+                }
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -169,12 +245,20 @@ export const loader = async ({ params }) => {
   const credits = fetchMovieDetails({
     movieId: `${params.movie_id}/credits`,
   });
+  const keywords = fetchMovieDetails({
+    movieId: `${params.movie_id}/keywords`,
+  });
+  const recommendations = fetchMovieDetails({
+    movieId: `${params.movie_id}/recommendations`,
+  });
 
   return defer({
     details,
     ageRatings,
     videos,
     credits,
+    keywords,
+    recommendations,
   });
 };
 
