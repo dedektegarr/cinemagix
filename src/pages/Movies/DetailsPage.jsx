@@ -3,6 +3,9 @@ import fetchMovieDetails from "../../api/movie-details";
 import { useEffect, useRef } from "react";
 import Button from "../../components/UI/Button/Button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import Section from "../../components/utils/Section";
+import SlideHorizontal from "../../components/utils/SlideHorizontal";
+import Card from "../../components/utils/Card";
 
 const DetailsPage = () => {
   const sectionRef = useRef(null);
@@ -137,54 +140,33 @@ const DetailsPage = () => {
 
       <div className="grid grid-cols-12 gap-4 container">
         <div className="col-span-9">
-          <section>
-            <h2 className="text-2xl my-5 font-bold">Top Billed Cast</h2>
-            <div className="flex overflow-x-auto gap-4">
-              <Await
-                resolve={credits}
-                children={(credits) =>
-                  credits.cast.map((cast) => (
-                    <div key={cast.cast_id} className="min-w-[150px]">
-                      <LazyLoadImage
-                        effect="blur"
-                        className="block w-full h-auto rounded-lg shadow-lg"
-                        src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
-                        alt="cast"
-                      />
-                      <h3 className="py-1">{cast.name}</h3>
-                      <p className="text-sm text-color-dark-3">
-                        {cast.character}
-                      </p>
-                    </div>
-                  ))
-                }
-              />
-            </div>
-          </section>
-          <section>
-            <h2 className="text-2xl my-5 font-bold">Top Billed Cast</h2>
-            <div className="flex overflow-x-auto gap-4">
-              <Await
-                resolve={credits}
-                children={(credits) =>
-                  credits.cast.map((cast) => (
-                    <div key={cast.cast_id} className="min-w-[150px]">
-                      <LazyLoadImage
-                        effect="blur"
-                        className="block w-full h-auto rounded-lg shadow-lg"
-                        src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
-                        alt="cast"
-                      />
-                      <h3 className="py-1">{cast.name}</h3>
-                      <p className="text-sm text-color-dark-3">
-                        {cast.character}
-                      </p>
-                    </div>
-                  ))
-                }
-              />
-            </div>
-          </section>
+          {/* CREDITS */}
+          <Section className="container">
+            <Section.Header title="Top Billed Cast" />
+
+            <SlideHorizontal>
+              <ul className="flex gap-4">
+                <Await
+                  resolve={credits}
+                  children={(credits) =>
+                    credits.cast.map((cast) => (
+                      <Card key={cast.id} className="min-w-[150px]">
+                        <Card.Image
+                          alt="Cast"
+                          src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
+                        />
+
+                        <Card.Text
+                          title={cast.name}
+                          subTitle={cast.character}
+                        />
+                      </Card>
+                    ))
+                  }
+                />
+              </ul>
+            </SlideHorizontal>
+          </Section>
         </div>
 
         <div className="col-span-3 py-5 px-3 flex flex-col gap-4">

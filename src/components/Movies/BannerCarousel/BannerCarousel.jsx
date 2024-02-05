@@ -1,6 +1,5 @@
 import Carousel from "react-multi-carousel";
 import BannerCarouselItem from "./BannerCarouselItem";
-import { formatDate } from "../../../utils/format-date";
 
 const responsive = {
   superLargeDesktop: {
@@ -24,28 +23,17 @@ const responsive = {
 
 const BannerCarousel = ({ title, dates, items }) => {
   return (
-    <section>
-      <div className="flex items-center justify-between gap-5 py-6">
-        {title && <h2 className="text-2xl font-bold">{title}</h2>}
-
-        <p className="text-sm md:text-base text-color-primary">
-          ( <span>{formatDate(dates.minimum)}</span> -{" "}
-          <span>{formatDate(dates.maximum)}</span> )
-        </p>
-      </div>
-
-      <Carousel
-        removeArrowOnDeviceType={["mobile", "tablet"]}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={4000}
-        responsive={responsive}
-      >
-        {items.map((item) => (
-          <BannerCarouselItem key={item.id} item={item} />
-        ))}
-      </Carousel>
-    </section>
+    <Carousel
+      removeArrowOnDeviceType={["mobile", "tablet"]}
+      infinite={true}
+      autoPlay={true}
+      autoPlaySpeed={4000}
+      responsive={responsive}
+    >
+      {items.map((item) => (
+        <BannerCarouselItem key={item.id} item={item} />
+      ))}
+    </Carousel>
   );
 };
 

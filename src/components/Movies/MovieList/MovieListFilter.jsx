@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { movieActions } from "../../../store/movie-slice";
 
-const MovieListFilter = ({ filters, section }) => {
+const MovieListFilter = ({ filters, filterName }) => {
   const dispatch = useDispatch();
-  const activeFilter = useSelector((state) => state.movie.filters[section]);
+  const activeFilter = useSelector((state) => state.movie.filters[filterName]);
 
   const handleChangeFilter = (e) => {
     e.preventDefault();
     const selectedFilter = e.currentTarget.id.toLowerCase();
 
-    dispatch(movieActions.filterChange({ section, selectedFilter }));
+    dispatch(movieActions.filterChange({ filterName, selectedFilter }));
   };
 
   return (

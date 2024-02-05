@@ -5,7 +5,7 @@ const movieSlice = createSlice({
   initialState: { filters: { trending: "day", popular: "movie" } },
   reducers: {
     filterChange(state, action) {
-      state.filters[action.payload.section] = action.payload.selectedFilter;
+      state.filters[action.payload.filterName] = action.payload.selectedFilter;
     },
   },
 });
