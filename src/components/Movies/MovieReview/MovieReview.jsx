@@ -36,7 +36,7 @@ const MovieReview = ({ review }) => {
         <p
           dangerouslySetInnerHTML={contentMarukup}
           className={`leading-relaxed ${
-            readMore ? "line-clamp-none" : "line-clamp-5"
+            readMore ? "line-clamp-none" : "line-clamp-3"
           } `}
         />
         <button

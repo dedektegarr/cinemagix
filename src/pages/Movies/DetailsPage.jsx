@@ -7,6 +7,7 @@ import SlideHorizontal from "../../components/utils/SlideHorizontal";
 import Card from "../../components/utils/Card";
 import MovieList from "../../components/Movies/MovieList/MovieList";
 import MovieReview from "../../components/Movies/MovieReview/MovieReview";
+import MovieVideo from "../../components/Movies/MovieVideo/MovieVideo";
 
 const DetailsPage = () => {
   const sectionRef = useRef(null);
@@ -147,7 +148,7 @@ const DetailsPage = () => {
       </section>
 
       <div className="grid grid-cols-12 gap-4 container">
-        <div className="col-span-9">
+        <div className="col-span-9 flex flex-col gap-8">
           {/* CREDITS */}
           <Section>
             <Section.Header title="Top Billed Cast" />
@@ -199,7 +200,20 @@ const DetailsPage = () => {
           <Section>
             <Section.Header title="Videos" />
 
-            <h1>Video </h1>
+            <SlideHorizontal>
+              <ul className="flex gap-4">
+                <Await
+                  resolve={videos}
+                  children={(videos) =>
+                    videos.results.map((video) => (
+                      <Link to={`https://www.youtube.com/watch?v=${video.key}`}>
+                        <MovieVideo video={video} key={video.id} />
+                      </Link>
+                    ))
+                  }
+                />
+              </ul>
+            </SlideHorizontal>
           </Section>
 
           {/* RECOMMENDATIONS */}
