@@ -12,11 +12,25 @@ const MovieReview = ({ review }) => {
     <Card className="shadow-xl p-4 bg-color-dark-1">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
-        <img
-          src={`https://media.themoviedb.org/t/p/w45_and_h45_face${author_details.avatar_path}`}
-          alt="Profile Image"
-          className="rounded-full"
-        />
+        {author_details.avatar_path ? (
+          <img
+            src={`https://media.themoviedb.org/t/p/w45_and_h45_face${author_details.avatar_path}`}
+            alt="Profile Image"
+            className="rounded-full"
+          />
+        ) : (
+          <div className="rounded-full p-3 bg-color-dark-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20"
+              viewBox="0 -960 960 960"
+              width="20"
+              fill="white"
+            >
+              <path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z" />
+            </svg>
+          </div>
+        )}
 
         <div>
           <h2>{author}</h2>

@@ -178,6 +178,7 @@ const DetailsPage = () => {
           </Section>
 
           {/* REVIEWS */}
+
           <Section>
             <Section.Header title="Reviews">
               <Link
@@ -191,12 +192,20 @@ const DetailsPage = () => {
             <Await
               resolve={reviews}
               children={(reviews) => (
-                <MovieReview review={reviews.results[0]} />
+                <>
+                  {reviews.total_results ? (
+                    <MovieReview review={reviews.results[0]} />
+                  ) : (
+                    <p className="bg-color-dark-1 text-color-dark-3 text-center rounded-md p-4">
+                      No reviews yet
+                    </p>
+                  )}
+                </>
               )}
             />
           </Section>
 
-          {/* MEDIA */}
+          {/* VIDEOS */}
           <Section>
             <Section.Header title="Videos" />
 

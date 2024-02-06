@@ -3,7 +3,7 @@ import Card from "../../utils/Card";
 
 const MovieVideo = ({ video }) => {
   return (
-    <Card className="relative min-w-[300px] shadow-lg overflow-hidden group">
+    <Card className="relative min-w-[300px] max-h-[300px] shadow-lg overflow-hidden group">
       <div className="flex items-center justify-center opacity-0 group-hover:opacity-50 absolute top-0 left-0 w-full h-full bg-black z-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
