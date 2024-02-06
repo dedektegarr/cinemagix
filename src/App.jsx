@@ -10,6 +10,9 @@ import DetailsPage, {
   loader as movieDetailsLoader,
 } from "./pages/Movies/DetailsPage";
 import Video from "./components/Movies/Video/Video";
+import Reviews, {
+  loader as movieReviewsLoader,
+} from "./components/Movies/Reviews/Reviews";
 
 const App = () => {
   const filters = useSelector((state) => state.movie.filters);
@@ -31,7 +34,14 @@ const App = () => {
         {
           path: "movies/:movie_id",
           element: <DetailsPage />,
-          children: [{ path: "video/:key", element: <Video /> }],
+          children: [
+            { path: "video/:key", element: <Video /> },
+            {
+              path: "reviews",
+              element: <Reviews />,
+              loader: movieReviewsLoader,
+            },
+          ],
           loader: movieDetailsLoader,
         },
         { path: "tv", element: <TvShowsPage /> },

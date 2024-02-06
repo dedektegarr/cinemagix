@@ -20,13 +20,13 @@ const Modal = ({ title, onClose, children }) => {
 
   return createPortal(
     <div
-      className="fixed top-0 left-0 z-[5000] w-full p-4 h-screen bg-black/50 backdrop-blur-md flex items-center justify-center"
+      className="fixed top-0 left-0 z-[5000] w-full h-screen bg-black/50 backdrop-blur-md flex items-center justify-center"
       onClick={handleCloseModal}
     >
       <dialog
         open={true}
         onClose={handleCloseModal}
-        className="bg-black w-full md:max-w-[800px] h-auto rounded-lg shadow-lg overflow-hidden block"
+        className="bg-black w-full max-h-[98%] overflow-y-auto md:max-w-[800px] h-auto rounded-lg shadow-lg overflow-hidden block"
       >
         <div className="px-4 py-3 flex justify-between items-center">
           <h1 className="text-color-light font-bold text-lg">{title}</h1>

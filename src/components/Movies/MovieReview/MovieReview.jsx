@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Card from "../../utils/Card";
 import { formatDate } from "../../../utils/format-date";
 
-const MovieReview = ({ review }) => {
-  const [readMore, setReadMore] = useState(false);
+const MovieReview = ({ review, withReadMore = true }) => {
+  const [readMore, setReadMore] = useState(withReadMore);
 
   const { author, content, author_details, created_at } = review;
   const contentMarukup = { __html: content };
@@ -11,7 +11,7 @@ const MovieReview = ({ review }) => {
   return (
     <Card className="shadow-xl p-4 bg-color-dark-1">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-4 text-color-light">
         {author_details.avatar_path ? (
           <img
             src={`https://media.themoviedb.org/t/p/w45_and_h45_face${author_details.avatar_path}`}
@@ -49,16 +49,19 @@ const MovieReview = ({ review }) => {
       <div className="text-sm">
         <p
           dangerouslySetInnerHTML={contentMarukup}
-          className={`leading-relaxed ${
-            readMore ? "line-clamp-none" : "line-clamp-3"
+          className={`leading-relaxed text-color-light ${
+            !readMore ? "line-clamp-none" : "line-clamp-3"
           } `}
         />
-        <button
-          onClick={() => setReadMore(!readMore)}
-          className="mt-1 text-color-dark-3 border-b border-color-dark-3 hover:text-color-primary hover:border-color-primary"
-        >
-          Read more
-        </button>
+
+        {withReadMore && (
+          <button
+            onClick={() => setReadMore(!readMore)}
+            className="mt-1 text-color-dark-3 border-b border-color-dark-3 hover:text-color-primary hover:border-color-primary"
+          >
+            Read more
+          </button>
+        )}
       </div>
     </Card>
   );
