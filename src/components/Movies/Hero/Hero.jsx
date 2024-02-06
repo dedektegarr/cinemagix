@@ -35,7 +35,7 @@ const Hero = ({ data }) => {
               </span>
             </motion.li>
             <motion.li initial={{ x: -50, opacity: 0 }}>
-              <h1 className="text-5xl font-bold my-6 2xl:text-6xl">
+              <h1 className="text-4xl md:text-5xl font-bold my-6 2xl:text-6xl">
                 {displayedItem.title}
               </h1>
             </motion.li>

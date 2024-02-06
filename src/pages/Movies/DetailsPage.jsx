@@ -96,9 +96,9 @@ const DetailsPage = () => {
         ref={sectionRef}
         className="relative h-[550px] container rounded-lg flex items-center"
       >
-        <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-color-dark-2 to-color-dark-2/0"></div>
+        <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t md:bg-gradient-to-r from-color-dark-2 to-color-dark-2/60 md:to-color-dark-2/0"></div>
 
-        <div className="relative max-w-[600px] p-8">
+        <div className="relative max-w-[600px] md:p-8 text-center md:text-left">
           <h1 className="text-4xl font-bold">{title}</h1>
           <blockquote className="text-sm mt-2 italic">{tagline}</blockquote>
           <div className="divide-x my-4 divide-color-dark-3 text-color-dark-3">
@@ -110,7 +110,7 @@ const DetailsPage = () => {
 
           <p className="leading-relaxed">{overview}</p>
 
-          <div className="flex gap-2 mt-6">
+          <div className="flex items-center justify-center md:justify-start gap-2 mt-6">
             <Button
               className="bg-color-primary p-3"
               rounded={true}
@@ -148,10 +148,10 @@ const DetailsPage = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-12 gap-4 container">
-        <div className="col-span-9 flex flex-col gap-8">
+      <div className="grid grid-cols-12 gap-8 lg:gap-4 container">
+        <div className="col-span-12 lg:col-span-9 flex flex-col gap-8">
           {/* CREDITS */}
-          <Section>
+          <Section className="md:mt-10">
             <Section.Header title="Top Billed Cast" />
 
             <SlideHorizontal>
@@ -160,7 +160,10 @@ const DetailsPage = () => {
                   resolve={credits}
                   children={(credits) =>
                     credits.cast.map((cast) => (
-                      <Card key={cast.id} className="min-w-[150px]">
+                      <Card
+                        key={cast.id}
+                        className="min-w-[130px] lg:min-w-[150px]"
+                      >
                         <Card.Image
                           alt="Cast"
                           src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
@@ -241,7 +244,7 @@ const DetailsPage = () => {
           </Section>
         </div>
 
-        <div className="col-span-3 py-5 px-3 flex flex-col gap-4">
+        <div className="col-span-12 lg:col-span-3 py-5 px-0 lg:px-3 flex flex-col gap-4">
           <div>
             <p className="font-bold">Status</p>
             <p className="text-color-dark-3">{details.status}</p>

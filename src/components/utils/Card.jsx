@@ -10,7 +10,7 @@ Card.Image = ({ src, className, alt }) => {
       effect="blur"
       src={src}
       alt={alt}
-      className={`w-full rounded-lg h-auto object-cover shadow-lg ${className}`}
+      className={`w-full rounded-lg h-auto object-cover object-center shadow-lg ${className}`}
     />
   );
 };
