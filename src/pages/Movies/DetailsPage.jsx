@@ -1,6 +1,6 @@
-import { Await, Link, defer, useLoaderData } from "react-router-dom";
+import { Await, Link, Outlet, defer, useLoaderData } from "react-router-dom";
 import fetchMovieDetails from "../../api/movie-details";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/utils/Section";
 import SlideHorizontal from "../../components/utils/SlideHorizontal";
@@ -10,6 +10,8 @@ import MovieReview from "../../components/Movies/MovieReview/MovieReview";
 import MovieVideo from "../../components/Movies/MovieVideo/MovieVideo";
 
 const DetailsPage = () => {
+  const [trailer, setTrailer] = useState(null);
+
   const sectionRef = useRef(null);
   const ageRatingRef = useRef(null);
   const trailerButtonRef = useRef(null);
@@ -47,7 +49,7 @@ const DetailsPage = () => {
       (video) => video.type.toLowerCase() === "trailer"
     );
 
-    trailerButtonRef.current.href += trailer.key;
+    setTrailer(trailer.key);
   };
 
   const getAgeRatings = async () => {
@@ -124,25 +126,24 @@ const DetailsPage = () => {
                 </svg>
               }
             ></Button>
-            <Button
-              ref={trailerButtonRef}
-              target="_blank"
-              href={`https://www.youtube.com/watch?v=`}
-              className="hover:text-slate-300"
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  viewBox="0 -960 960 960"
-                  width="24"
-                  fill="white"
-                >
-                  <path d="M320-200v-560l440 280-440 280Z" />
-                </svg>
-              }
-            >
-              Play Trailer
-            </Button>
+            <Link to={`video/${trailer}`}>
+              <Button
+                className="hover:text-slate-300"
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                    fill="white"
+                  >
+                    <path d="M320-200v-560l440 280-440 280Z" />
+                  </svg>
+                }
+              >
+                Play Trailer
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -215,7 +216,7 @@ const DetailsPage = () => {
                   resolve={videos}
                   children={(videos) =>
                     videos.results.map((video) => (
-                      <Link to={`https://www.youtube.com/watch?v=${video.key}`}>
+                      <Link to={`video/${video.key}`} key={video.id}>
                         <MovieVideo video={video} key={video.id} />
                       </Link>
                     ))
@@ -283,6 +284,9 @@ const DetailsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* MODAL */}
+      <Outlet />
     </div>
   );
 };

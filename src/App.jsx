@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import DetailsPage, {
   loader as movieDetailsLoader,
 } from "./pages/Movies/DetailsPage";
+import Video from "./components/Movies/Video/Video";
 
 const App = () => {
   const filters = useSelector((state) => state.movie.filters);
@@ -30,6 +31,7 @@ const App = () => {
         {
           path: "movies/:movie_id",
           element: <DetailsPage />,
+          children: [{ path: "video/:key", element: <Video /> }],
           loader: movieDetailsLoader,
         },
         { path: "tv", element: <TvShowsPage /> },
