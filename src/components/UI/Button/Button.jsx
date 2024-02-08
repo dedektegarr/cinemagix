@@ -20,7 +20,7 @@ const Button = ({ icon, className, children, href, rounded, ...props }) => {
 
   return (
     <button
-      className={`${className} ${paddings} flex items-center center gap-2`}
+      className={`${className} ${paddings} flex items-center gap-2 disabled:opacity-50`}
       {...props}
     >
       {icon && icon}

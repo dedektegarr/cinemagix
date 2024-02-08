@@ -4,10 +4,12 @@ import { fetchData } from "../../utils/fetch-data";
 import MovieItem from "../../components/Movies/MovieItem/MovieItem";
 import Tabs from "../../components/UI/Tabs/Tabs";
 import Section from "../../components/utils/Section";
+import Pagination from "../../components/utils/Pagination";
 
 const MoviesPage = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
   const [type, setType] = useState({ id: "popular", label: "Popular" });
+  const [page, setPage] = useState(1);
 
   const tabs = [
     { id: "popular", label: "Popular" },
@@ -17,13 +19,13 @@ const MoviesPage = () => {
   ];
 
   const fetchMovies = async () => {
-    const data = await fetchData({ resource: `movie/${type.id}` });
-    setMovies(data.results);
+    const data = await fetchData({ resource: `movie/${type.id}?page=${page}` });
+    setMovies(data);
   };
 
   useEffect(() => {
     fetchMovies();
-  }, [type]);
+  }, [type, page]);
 
   return (
     <div className="container grid grid-cols-5 gap-4">
@@ -38,11 +40,19 @@ const MoviesPage = () => {
         <Section>
           <Section.Header title={type.label} />
           <ul className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
-            {movies.map((movie) => (
+            {movies?.results.map((movie) => (
               <MovieItem movie={movie} key={movie.id} />
             ))}
           </ul>
         </Section>
+
+        <div className="flex justify-center items-center py-8">
+          <Pagination
+            activePage={page}
+            totalPage={movies?.total_pages}
+            onChangePage={(page) => setPage(page)}
+          />
+        </div>
       </div>
     </div>
   );
