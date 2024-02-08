@@ -1,7 +1,7 @@
 import MovieItem from "../MovieItem/MovieItem";
 import { motion } from "framer-motion";
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, layout = "flex" }) => {
   return (
     <motion.ul
       variants={{
@@ -15,7 +15,7 @@ const MovieList = ({ movies }) => {
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className="flex gap-4"
+      className={`${layout} gap-4`}
     >
       {movies?.map((movie) => (
         <motion.li
