@@ -26,7 +26,7 @@ const Modal = ({ title, onClose, children }) => {
       <dialog
         open={true}
         onClose={handleCloseModal}
-        className="bg-black w-full max-h-[98%] overflow-y-auto md:max-w-[800px] h-auto rounded-lg shadow-lg overflow-hidden block"
+        className="bg-black w-full max-h-[98%] md:max-w-[800px] min-h-auto rounded-lg shadow-lg overflow-hidden block"
       >
         <div className="px-4 py-3 flex justify-between items-center">
           <h1 className="text-color-light font-bold text-lg">{title}</h1>
@@ -46,7 +46,9 @@ const Modal = ({ title, onClose, children }) => {
             }
           />
         </div>
-        {children}
+        <div className="max-h-[600px] px-4 py-3 overflow-y-auto">
+          {children}
+        </div>
       </dialog>
     </div>,
     document.getElementById("modal")

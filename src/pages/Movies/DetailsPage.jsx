@@ -14,7 +14,6 @@ const DetailsPage = () => {
 
   const sectionRef = useRef(null);
   const ageRatingRef = useRef(null);
-  const trailerButtonRef = useRef(null);
 
   const {
     details,
@@ -86,6 +85,9 @@ const DetailsPage = () => {
 
   useEffect(() => {
     setSectionBackground();
+  }, [details]);
+
+  useEffect(() => {
     getAgeRatings();
     getTrailer();
   }, []);

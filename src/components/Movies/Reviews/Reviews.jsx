@@ -9,10 +9,10 @@ const Reviews = () => {
 
   return (
     <Modal title="Reviews" onClose={() => navigate("..")}>
-      <div className="px-4 pb-4 flex flex-col gap-3">
+      <div className="flex flex-col gap-3">
         {reviews.total_results ? (
           reviews.results.map((review) => (
-            <MovieReview withReadMore={false} review={review} />
+            <MovieReview key={review.id} withReadMore={false} review={review} />
           ))
         ) : (
           <p className="text-color-dark-3 text-sm bg-color-dark-1 text-center p-4 rounded-md">
