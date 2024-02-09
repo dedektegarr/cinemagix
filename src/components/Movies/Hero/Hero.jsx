@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../UI/Button/Button";
 import HeroCarousel from "./HeroCarousel";
 import { stagger, useAnimate, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = ({ data }) => {
   const sectionRef = useRef(null);
@@ -35,7 +36,7 @@ const Hero = ({ data }) => {
               </span>
             </motion.li>
             <motion.li initial={{ x: -50, opacity: 0 }}>
-              <h1 className="text-4xl md:text-5xl font-bold my-6 2xl:text-6xl">
+              <h1 className="text-4xl md:text-5xl font-bold my-5 2xl:text-6xl">
                 {displayedItem.title}
               </h1>
             </motion.li>
@@ -45,14 +46,12 @@ const Hero = ({ data }) => {
               </p>
             </motion.li>
             <motion.li initial={{ x: -50, opacity: 0 }}>
-              <Button className="bg-indigo-700 rounded-full px-8 mt-4 mb-8 2xl:text-xl">
-                Hello
-              </Button>
-            </motion.li>
-            <motion.li initial={{ x: -50, opacity: 0 }}>
-              <p className="text-color-dark-3 2xl:text-xl">
-                Lorem ipsum dolor sit amet consectetu
-              </p>
+              <Link
+                to={`movies/${displayedItem.id}`}
+                className="bg-indigo-600 hover:bg-indigo-700 rounded-full py-3 inline-block px-6 text-sm mt-4 mb-8 2xl:text-xl"
+              >
+                View More
+              </Link>
             </motion.li>
           </ul>
         </div>
