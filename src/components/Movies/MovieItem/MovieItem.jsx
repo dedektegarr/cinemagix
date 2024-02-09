@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../../utils/format-date";
 import Card from "../../utils/Card";
 
-const MovieItem = ({ movie }) => {
+const MovieItem = ({ movie, className }) => {
   let ratingColor;
   if (movie.vote_average < 5) {
     ratingColor = "border-red-700";
@@ -14,7 +14,7 @@ const MovieItem = ({ movie }) => {
 
   return (
     <Link to={`/movies/${movie.id}`}>
-      <Card className="w-[150px] lg:w-[200px] group relative">
+      <Card className={`w-[150px] lg:w-[200px] group relative ${className}`}>
         <Card.Image
           src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
           alt="Movie Poster"

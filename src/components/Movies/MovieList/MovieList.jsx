@@ -25,7 +25,11 @@ const MovieList = ({ movies, layout = "flex" }) => {
           }}
           key={movie.id}
         >
-          <MovieItem width={300} movie={movie} />
+          <MovieItem
+            width={300}
+            movie={movie}
+            className="w-[150px] lg:w-[200px]"
+          />
         </motion.li>
       ))}
     </motion.ul>

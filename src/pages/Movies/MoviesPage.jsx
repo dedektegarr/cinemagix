@@ -28,7 +28,7 @@ const MoviesPage = () => {
   }, [type, page]);
 
   return (
-    <div className="container grid grid-cols-5 gap-4">
+    <div className="container grid grid-cols-5 gap-4 lg:gap-8">
       <div className="col-span-5 lg:col-span-1 pt-6">
         <Tabs
           items={tabs}
@@ -39,9 +39,9 @@ const MoviesPage = () => {
       <div className="col-span-5 lg:col-span-4">
         <Section>
           <Section.Header title={type.label} />
-          <ul className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
+          <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
             {movies?.results.map((movie) => (
-              <MovieItem movie={movie} key={movie.id} />
+              <MovieItem movie={movie} key={movie.id} className="w-full" />
             ))}
           </ul>
         </Section>
