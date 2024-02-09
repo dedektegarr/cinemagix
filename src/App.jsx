@@ -15,6 +15,9 @@ import Reviews, {
   loader as movieReviewsLoader,
 } from "./components/Movies/Reviews/Reviews";
 import PeoplePage, { loader as peopleLoader } from "./pages/People/PeoplePage";
+import PeopleDetailsPage, {
+  loader as peopleDetailsLoader,
+} from "./pages/People/PeopleDetailsPage";
 
 const App = () => {
   const filters = useSelector((state) => state.movie.filters);
@@ -48,6 +51,11 @@ const App = () => {
           loader: movieDetailsLoader,
         },
         { path: "people", element: <PeoplePage />, loader: peopleLoader },
+        {
+          path: "people/:people_id",
+          element: <PeopleDetailsPage />,
+          loader: peopleDetailsLoader,
+        },
       ],
     },
   ]);
