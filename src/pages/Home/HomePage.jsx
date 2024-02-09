@@ -62,7 +62,11 @@ const HomePage = () => {
           <Await
             resolve={trendingMovies}
             children={(trendingMovies) => (
-              <MovieList movies={trendingMovies.results} />
+              <MovieList
+                className="flex gap-4"
+                itemClassName="w-[150px] lg:w-[200px]"
+                movies={trendingMovies.results}
+              />
             )}
           />
         </SlideHorizontal>
@@ -76,7 +80,11 @@ const HomePage = () => {
           <Await
             resolve={popularMovies}
             children={(popularMovies) => (
-              <MovieList movies={popularMovies.results} />
+              <MovieList
+                className="flex gap-4"
+                itemClassName="w-[150px] lg:w-[200px]"
+                movies={popularMovies.results}
+              />
             )}
           />
         </SlideHorizontal>

@@ -3,8 +3,9 @@ import RootLayout from "./pages/RootLayout";
 import HomePage, {
   loader as homePageMoviesLoader,
 } from "./pages/Home/HomePage";
-import MoviesPage from "./pages/Movies/MoviesPage";
-import TvShowsPage from "./pages/TvShows/TvShowsPage";
+import MoviesPage, {
+  loader as moviesPageLoader,
+} from "./pages/Movies/MoviesPage";
 import { useSelector } from "react-redux";
 import DetailsPage, {
   loader as movieDetailsLoader,
@@ -13,6 +14,7 @@ import Video from "./components/Movies/Video/Video";
 import Reviews, {
   loader as movieReviewsLoader,
 } from "./components/Movies/Reviews/Reviews";
+import PeoplePage, { loader as peopleLoader } from "./pages/People/PeoplePage";
 
 const App = () => {
   const filters = useSelector((state) => state.movie.filters);
@@ -30,6 +32,7 @@ const App = () => {
         {
           path: "movies",
           element: <MoviesPage />,
+          loader: moviesPageLoader,
         },
         {
           path: "movies/:movie_id",
@@ -44,7 +47,7 @@ const App = () => {
           ],
           loader: movieDetailsLoader,
         },
-        { path: "tv", element: <TvShowsPage /> },
+        { path: "people", element: <PeoplePage />, loader: peopleLoader },
       ],
     },
   ]);

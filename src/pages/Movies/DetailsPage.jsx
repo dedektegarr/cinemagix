@@ -239,7 +239,11 @@ const DetailsPage = () => {
               <Await
                 resolve={recommendations}
                 children={(recommendations) => (
-                  <MovieList movies={recommendations.results} />
+                  <MovieList
+                    className="flex gap-4"
+                    itemClassName="w-[150px] lg:w-[200px]"
+                    movies={recommendations.results}
+                  />
                 )}
               />
             </SlideHorizontal>

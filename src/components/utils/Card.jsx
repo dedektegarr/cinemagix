@@ -1,23 +1,21 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
 const Card = ({ className, children }) => {
   return <div className={`rounded-md ${className}`}>{children}</div>;
 };
 
 Card.Image = ({ src, className, alt }) => {
   return (
-    <LazyLoadImage
+    <img
       effect="blur"
       src={src}
       alt={alt}
-      className={`w-full rounded-lg h-auto object-cover object-center shadow-lg ${className}`}
+      className={`block w-full rounded-lg h-auto object-cover object-center shadow-lg ${className}`}
     />
   );
 };
 
-Card.Text = ({ title, subTitle }) => {
+Card.Text = ({ title, subTitle, className }) => {
   return (
-    <div className="p-1 mt-2">
+    <div className={`p-1 mt-2 ${className}`}>
       <h3 className="font-bold transition group-hover:text-color-primary">
         {title}
       </h3>

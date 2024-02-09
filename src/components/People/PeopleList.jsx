@@ -1,7 +1,7 @@
-import MovieItem from "../MovieItem/MovieItem";
+import PeopleItem from "./PeopleItem";
 import { motion } from "framer-motion";
 
-const MovieList = ({ movies, className, itemClassName }) => {
+const PeopleList = ({ peoples }) => {
   return (
     <motion.ul
       variants={{
@@ -15,21 +15,21 @@ const MovieList = ({ movies, className, itemClassName }) => {
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className={`${className} grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
     >
-      {movies?.map((movie) => (
+      {peoples.results.map((people) => (
         <motion.li
           variants={{
             hidden: { y: 10, opacity: 0 },
             visible: { y: 0, opacity: 1 },
           }}
-          key={movie.id}
+          key={people.id}
         >
-          <MovieItem width={300} movie={movie} className={itemClassName} />
+          <PeopleItem people={people} />
         </motion.li>
       ))}
     </motion.ul>
   );
 };
 
-export default MovieList;
+export default PeopleList;

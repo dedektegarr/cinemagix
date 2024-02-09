@@ -14,7 +14,7 @@ const MovieItem = ({ movie, className }) => {
 
   return (
     <Link to={`/movies/${movie.id}`}>
-      <Card className={`w-[150px] lg:w-[200px] group relative ${className}`}>
+      <Card className={`group relative ${className}`}>
         <Card.Image
           src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
           alt="Movie Poster"
