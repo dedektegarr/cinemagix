@@ -15,16 +15,6 @@ const NavbarLinks = ({ className }) => {
       </li>
       <li>
         <NavLink
-          to="tv"
-          className={({ isActive }) =>
-            `${isActive ? "nav-active" : ""} nav-link`
-          }
-        >
-          TV Shows
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="people"
           className={({ isActive }) =>
             `${isActive ? "nav-active" : ""} nav-link`
