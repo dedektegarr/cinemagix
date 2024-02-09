@@ -20,10 +20,6 @@ const HomePage = () => {
     { label: "Today", value: "day" },
     { label: "This Week", value: "week" },
   ];
-  const popularMovieFilters = [
-    { label: "Streaming", value: "movie" },
-    { label: "On Tv", value: "tv" },
-  ];
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8 -mt-20">
@@ -74,9 +70,7 @@ const HomePage = () => {
 
       {/* Popular Movies */}
       <Section className="container">
-        <Section.Header title="Popular">
-          <MovieListFilter filters={popularMovieFilters} filterName="popular" />
-        </Section.Header>
+        <Section.Header title="Popular" />
 
         <SlideHorizontal>
           <Await
