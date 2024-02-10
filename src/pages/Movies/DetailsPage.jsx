@@ -168,6 +168,7 @@ const DetailsPage = () => {
                       >
                         <Card.Image
                           alt="Cast"
+                          className="max-h-[220px]"
                           src={`https://media.themoviedb.org/t/p/w300_and_h450_bestv2${cast.profile_path}`}
                         />
 

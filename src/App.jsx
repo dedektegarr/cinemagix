@@ -18,6 +18,10 @@ import PeoplePage, { loader as peopleLoader } from "./pages/People/PeoplePage";
 import PeopleDetailsPage, {
   loader as peopleDetailsLoader,
 } from "./pages/People/PeopleDetailsPage";
+import RootSearchPage from "./pages/Search/RootSearchPage";
+import All, { loader as searchAllLoader } from "./pages/Search/All";
+import Movie, { loader as searchMovieLoader } from "./pages/Search/Movie";
+import People, { loader as searchPeopleLoader } from "./pages/Search/People";
 
 const App = () => {
   const filters = useSelector((state) => state.movie.filters);
@@ -55,6 +59,16 @@ const App = () => {
           path: "people/:people_id",
           element: <PeopleDetailsPage />,
           loader: peopleDetailsLoader,
+        },
+        {
+          path: "search",
+          element: <RootSearchPage />,
+          children: [
+            { index: true, element: <All />, loader: searchAllLoader },
+            { path: "all", element: <All />, loader: searchAllLoader },
+            { path: "movie", element: <Movie />, loader: searchMovieLoader },
+            { path: "people", element: <People />, loader: searchPeopleLoader },
+          ],
         },
       ],
     },

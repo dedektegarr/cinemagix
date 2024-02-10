@@ -1,13 +1,30 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../UI/Button/Button";
 
 const SearchBar = ({ className }) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = formData.get("query");
+
+    navigate(`/search?query=${data}`);
+    console.log("submited");
+  };
+
   return (
     <form
+      method="GET"
+      onSubmit={handleSubmit}
       action=""
       className={`w-full lg:w-[350px] sm:flex items-center bg-color-dark-1 rounded-full p-1 gap-2 ${className}`}
     >
       <input
         type="search"
+        name="query"
+        autoComplete="off"
         className="flex-1 bg-transparent outline-none pl-4 text-color-dark-3 capitalize"
         placeholder="Search..."
       />
