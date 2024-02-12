@@ -20,7 +20,7 @@ const RootSearchPage = () => {
   ];
 
   return (
-    <div className="container grid grid-cols-5 gap-4">
+    <div className="container grid grid-cols-5 py-8 gap-4 lg:gap-8">
       <div className="col-span-1">
         <Tabs
           items={tabs}
