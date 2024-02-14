@@ -1,12 +1,9 @@
 import { createPortal } from "react-dom";
 import Button from "../Button/Button";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Modal = ({ title, onClose, children }) => {
-  const navigate = useNavigate();
-
   const handleCloseModal = (e) => {
     e.stopPropagation();
 
@@ -20,10 +17,7 @@ const Modal = ({ title, onClose, children }) => {
   }, []);
 
   return createPortal(
-    <div
-      className="fixed top-0 left-0 z-[5000] w-full h-screen bg-black/50 backdrop-blur-md flex items-center justify-center"
-      onClick={handleCloseModal}
-    >
+    <div className="fixed top-0 left-0 z-[5000] w-full h-screen bg-black/50 backdrop-blur-md flex items-center justify-center">
       <motion.dialog
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

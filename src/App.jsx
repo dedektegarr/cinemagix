@@ -6,7 +6,7 @@ import HomePage, {
 import MoviesPage, {
   loader as moviesPageLoader,
 } from "./pages/Movies/MoviesPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DetailsPage, {
   loader as movieDetailsLoader,
 } from "./pages/Movies/DetailsPage";
@@ -22,9 +22,13 @@ import RootSearchPage from "./pages/Search/RootSearchPage";
 import All, { loader as searchAllLoader } from "./pages/Search/All";
 import Movie, { loader as searchMovieLoader } from "./pages/Search/Movie";
 import People, { loader as searchPeopleLoader } from "./pages/Search/People";
+import { useEffect } from "react";
+import { movieActions } from "./store/movie-slice";
+import FarvoritePage from "./pages/Favorite/FarvoritePage";
 
 const App = () => {
   const filters = useSelector((state) => state.movie.filters);
+  const dispatch = useDispatch();
 
   const router = createBrowserRouter([
     {
@@ -54,9 +58,9 @@ const App = () => {
           ],
           loader: movieDetailsLoader,
         },
-        { path: "people", element: <PeoplePage />, loader: peopleLoader },
+        { path: "person", element: <PeoplePage />, loader: peopleLoader },
         {
-          path: "people/:people_id",
+          path: "person/:people_id",
           element: <PeopleDetailsPage />,
           loader: peopleDetailsLoader,
         },
@@ -70,9 +74,17 @@ const App = () => {
             { path: "people", element: <People />, loader: searchPeopleLoader },
           ],
         },
+        {
+          path: "favorites",
+          element: <FarvoritePage />,
+        },
       ],
     },
   ]);
+
+  useEffect(() => {
+    dispatch(movieActions.setFavorite());
+  }, []);
 
   return <RouterProvider router={router} />;
 };

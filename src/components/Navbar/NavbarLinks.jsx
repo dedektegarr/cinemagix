@@ -15,7 +15,7 @@ const NavbarLinks = ({ className }) => {
       </li>
       <li>
         <NavLink
-          to="people"
+          to="person"
           className={({ isActive }) =>
             `${isActive ? "nav-active" : ""} nav-link`
           }
