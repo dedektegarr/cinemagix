@@ -1,6 +1,4 @@
-import Button from "../../UI/Button/Button";
 import { formatDate } from "../../../utils/format-date";
-import { limitText } from "../../../utils/limit";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
@@ -53,7 +51,7 @@ const BannerCarouselItem = ({ item }) => {
           </p>
 
           <Link
-            to={`movies/${item.id}`}
+            to={`movie/${item.id}`}
             className="bg-color-primary py-2 px-3 hover:bg-color-primary-1 text-sm rounded-md"
           >
             View More

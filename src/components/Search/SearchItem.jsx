@@ -11,7 +11,7 @@ const SearchItem = ({ item }) => {
     <Card className="flex justify-between bg-color-dark-1 text-color-light shadow-lg">
       <Link
         className="flex gap-4"
-        to={`/${item.media_type ?? "movies"}/${item.id}`}
+        to={`/${item.media_type ?? "movie"}/${item.id}`}
       >
         <div className="min-w-[100px]">
           <Card.Image

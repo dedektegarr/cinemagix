@@ -47,7 +47,7 @@ const Hero = ({ data }) => {
             </motion.li>
             <motion.li initial={{ x: -50, opacity: 0 }}>
               <Link
-                to={`movies/${displayedItem.id}`}
+                to={`movie/${displayedItem.id}`}
                 className="bg-indigo-600 hover:bg-indigo-700 rounded-full py-3 inline-block px-6 text-sm mt-4 mb-8 2xl:text-xl"
               >
                 View More

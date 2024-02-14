@@ -23,7 +23,7 @@ const MovieItem = ({ movie, className }) => {
         alt="Movie Poster"
       />
 
-      <Link to={`/movies/${movie.id}`}>
+      <Link to={`/movie/${movie.id}`}>
         <Card.Text
           title={movie.title || movie.name}
           subTitle={formatDate(movie.release_date || movie.first_air_date)}

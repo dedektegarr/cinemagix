@@ -46,7 +46,7 @@ const App = () => {
           loader: moviesPageLoader,
         },
         {
-          path: "movies/:movie_id",
+          path: "movie/:movie_id",
           element: <DetailsPage />,
           children: [
             { path: "video/:key", element: <Video /> },
