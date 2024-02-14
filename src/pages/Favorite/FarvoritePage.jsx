@@ -13,7 +13,7 @@ const FarvoritePage = () => {
         <SearchList results={favorites} />
       ) : (
         <p className="bg-color-dark-1 text-color-dark-3 text-center rounded-md p-4">
-          No reviews yet
+          No favorites yet
         </p>
       )}
     </Modal>
