@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="container flex gap-6 py-8 mt-16">
+    <div className="container flex flex-col md:flex-row gap-6 p-4 md:p-8 mt-16 bg-color-dark-1/50 rounded-lg">
       <div className="flex-1">
         <NavbarLogo />
         <p className="mt-4 leading-relaxed text-color-dark-3">
@@ -23,7 +23,7 @@ const Footer = () => {
       </div>
       <div className="flex-1">
         <h2 className="text-lg font-bold py-1">About Developer</h2>
-        <p className="text-color-dark-3 mt-4 leading-relaxed">
+        <p className="text-color-dark-3 md:mt-4 mt-1 leading-relaxed">
           This website was developed by{" "}
           <Link
             to="https://www.linkedin.com/in/dedek-tegar-apriyandi-9b8997269/"
