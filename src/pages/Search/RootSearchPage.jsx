@@ -21,14 +21,14 @@ const RootSearchPage = () => {
 
   return (
     <div className="container grid grid-cols-5 py-8 gap-4 lg:gap-8">
-      <div className="col-span-1">
+      <div className="col-span-5 lg:col-span-1">
         <Tabs
           items={tabs}
           activeItem={{ id: activeType }}
           onSelect={handleChangeType}
         />
       </div>
-      <div className="col-span-4">
+      <div className="col-span-5 lg:col-span-4">
         <Outlet />
       </div>
     </div>
