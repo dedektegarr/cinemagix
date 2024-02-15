@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef } from "react";
 import LoadingBar from "react-top-loading-bar";
+import Footer from "../components/Footer/Footer";
 
 const RootLayout = () => {
   const navigation = useNavigation();
@@ -25,10 +26,15 @@ const RootLayout = () => {
       <LoadingBar color="#00ADB5" ref={ref} />
       <AnimatePresence>{showMobileNav && <NavbarMobile />}</AnimatePresence>
 
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <main className="mt-20">
         <Outlet />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };
